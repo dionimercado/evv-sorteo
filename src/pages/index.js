@@ -99,7 +99,7 @@ const Home = () => {
       <main>
         <div className="container">
           <div className="row">
-            <div className="col-md-7 mx-auto">
+            <div className="col-lg-7 mx-auto">
               <form
                 onSubmit={findWinner}
                 className="w-100 shadow p-3 p-md-5 mt-5 rounded bg-white"
@@ -200,6 +200,7 @@ const Home = () => {
           position: absolute;
           content: "";
           width: 100%;
+          max-width: 1200px;
           height: 100px;
           top: -100px;
           left: calc(50% - 50vw);
@@ -265,6 +266,12 @@ const Home = () => {
 
           .title {
             font-size: 3rem;
+          }
+        }
+
+        @media (min-width: 1201px) {
+          main::before {
+            left: calc(50% - 840px);
           }
         }
       `}</style>
