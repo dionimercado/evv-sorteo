@@ -71,7 +71,7 @@ const Home = () => {
   };
 
   return (
-    <div className="container">
+    <>
       <Head>
         <title>Sorteo - Escuela de Vuelo Virtual</title>
         <link rel="icon" href="/favicon.ico" />
@@ -81,9 +81,9 @@ const Home = () => {
         />
       </Head>
 
-      <main>
+      <header className="text-center py-md-5 py-4">
         <img
-          width="300"
+          width="250"
           className="img-fluid logo"
           src="/images/logo.jpg"
           alt="E.V.V."
@@ -94,75 +94,89 @@ const Home = () => {
           Introduzca la lista de opciones <code>en cada linea</code> por
           separado
         </p>
+      </header>
 
-        <form
-          onSubmit={findWinner}
-          className="w-100 shadow p-3 p-md-5 mt-5 rounded"
-        >
-          <h4 className="mb-3 d-flex justify-content-between">
-            <span>
-              Total de participantes:{" "}
-              <span className="badge badge-dark">{participants.length}</span>
-            </span>
-            <button
-              className="btn btn-sm btn-secondary"
-              onClick={createDuplicates}
-            >
-              Corregir duplicados
-            </button>
-          </h4>
-          <div className="form-group">
-            <textarea
-              name="options"
-              id="options"
-              cols="30"
-              rows="20"
-              className="form-control"
-              value={participants.join("\n")}
-              onChange={e => setParticipants(e.target.value.split("\n"))}
-            />
-          </div>
-
-          <div className="form-group text-center mt-5 mb-5">
-            <button
-              className={`btn btn-dark btn-lg ${loading ? "disabled" : ""}`}
-              disabled={loading}
-            >
-              ENCONTRAR GANADOR!
-              {loading && (
-                <div
-                  className="spinner-grow spinner-grow-sm ml-3"
-                  role="status"
-                >
-                  <span className="sr-only">Loading...</span>
+      <main>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-7 mx-auto">
+              <form
+                onSubmit={findWinner}
+                className="w-100 shadow p-3 p-md-5 mt-5 rounded bg-white"
+              >
+                <h4 className="mb-3 d-flex justify-content-between">
+                  <span>
+                    Total de participantes:{" "}
+                    <span className="badge badge-dark">
+                      {participants.length}
+                    </span>
+                  </span>
+                  <button
+                    className="btn btn-sm btn-secondary"
+                    onClick={createDuplicates}
+                  >
+                    Corregir duplicados
+                  </button>
+                </h4>
+                <div className="form-group">
+                  <textarea
+                    name="options"
+                    id="options"
+                    cols="30"
+                    rows="20"
+                    className="form-control"
+                    value={participants.join("\n")}
+                    onChange={e => setParticipants(e.target.value.split("\n"))}
+                  />
                 </div>
-              )}
-            </button>
-          </div>
-          {winner && (
-            <>
-              <div className="alert alert-success text-center">
-                {loading ? (
-                  <div className="d-block">
-                    <h5 className="text-center text-uppercase">
-                      Y el ganador es:
-                    </h5>
-                    <div className="spinner-border" role="status">
-                      <span className="sr-only">Loading...</span>
+
+                <div className="form-group text-center mt-5 mb-5">
+                  <button
+                    className={`btn btn-dark btn-lg ${
+                      loading ? "disabled" : ""
+                    }`}
+                    disabled={loading}
+                  >
+                    ENCONTRAR GANADOR!
+                    {loading && (
+                      <div
+                        className="spinner-grow spinner-grow-sm ml-3"
+                        role="status"
+                      >
+                        <span className="sr-only">Loading...</span>
+                      </div>
+                    )}
+                  </button>
+                </div>
+                {winner && (
+                  <>
+                    <div className="alert alert-success text-center">
+                      {loading ? (
+                        <div className="d-block">
+                          <h5 className="text-center text-uppercase">
+                            Y el ganador es:
+                          </h5>
+                          <div className="spinner-border" role="status">
+                            <span className="sr-only">Loading...</span>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="d-block">
+                          <h5 className="text-center text-uppercase">
+                            Y el ganador es:
+                          </h5>
+                          <h3 className="font-weght-bold display-5">
+                            {winner}
+                          </h3>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ) : (
-                  <div className="d-block">
-                    <h5 className="text-center text-uppercase">
-                      Y el ganador es:
-                    </h5>
-                    <h3 className="font-weght-bold display-5">{winner}</h3>
-                  </div>
+                  </>
                 )}
-              </div>
-            </>
-          )}
-        </form>
+              </form>
+            </div>
+          </div>
+        </div>
       </main>
 
       <footer>
@@ -176,22 +190,23 @@ const Home = () => {
       </footer>
 
       <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
         main {
           padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+          background-color: #e2e4e4;
+          position: relative;
+          margin-top: 150px;
+        }
+        main::before {
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 100px;
+          top: -100px;
+          left: calc(50% - 50vw);
+          background-image: url(//download.aopa.org/footer/footer_scene.svg);
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: right bottom;
         }
 
         footer {
@@ -268,7 +283,7 @@ const Home = () => {
           box-sizing: border-box;
         }
       `}</style>
-    </div>
+    </>
   );
 };
 
